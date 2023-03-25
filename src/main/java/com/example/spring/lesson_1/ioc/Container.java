@@ -1,4 +1,4 @@
-package com.example.spring.ioc;
+package com.example.spring.lesson_1.ioc;
 /**
  * Dependency Injection
  * фреймворк определяет и внедряет

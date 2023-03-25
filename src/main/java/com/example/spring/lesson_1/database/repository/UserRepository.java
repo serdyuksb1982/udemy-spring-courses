@@ -1,6 +1,6 @@
-package com.example.spring.database.repository;
+package com.example.spring.lesson_1.database.repository;
 
-import com.example.spring.database.rpool.ConnectionPool;
+import com.example.spring.lesson_1.database.rpool.ConnectionPool;
 
 public class UserRepository {
     private final ConnectionPool connectionPool;

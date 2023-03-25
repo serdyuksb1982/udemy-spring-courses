@@ -1,7 +1,7 @@
-package com.example.spring.service;
+package com.example.spring.lesson_1.service;
 
-import com.example.spring.database.repository.CompanyRepository;
-import com.example.spring.database.repository.UserRepository;
+import com.example.spring.lesson_1.database.repository.UserRepository;
+import com.example.spring.lesson_1.database.repository.CompanyRepository;
 
 public class UserService {
     private final UserRepository userRepository;
