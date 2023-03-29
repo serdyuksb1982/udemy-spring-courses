@@ -4,6 +4,8 @@ import com.example.spring.lesson_1.database.repository.CompanyRepository;
 import com.example.spring.lesson_1.database.rpool.ConnectionPool;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Timer;
+
 /**
  * Inversion of Control
  * (IoC - инверсия управления)
@@ -22,6 +24,7 @@ public class ApplicationRunner {
             System.out.println((connectionPool));
             var companyRepository = context.getBean("companyRepository", CompanyRepository.class);
             System.out.println(companyRepository);
+            System.out.println(System.currentTimeMillis());
         }
 
     }
