@@ -7,10 +7,13 @@
                             http://www.springframework.org/schema/context
                             http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
+    <context:annotation-config/>
     <context:property-placeholder location="classpath:application.properties"/>
     <!--<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="locations" value="application.properties"/>
     </bean>-->
+    <bean class="com.example.spring.lesson_1.bfpp.LogBeanFactoryPostProcessor"/>
+    <bean class="com.example.spring.lesson_1.bfpp.VerifyPropertyBeanFactoryPostProcessor"/>
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="${db.driver}"/>
     </bean>
@@ -19,14 +22,15 @@
           destroy-method="destroy">
         <constructor-arg name="userName" type="java.lang.String" value="${db.username}"/>
         <constructor-arg name="properties" type="java.util.Map">
-            <map>
+            <null/>
+            <!--<map>
                 <entry key="url" value="postgresql"/>
                 <entry key="password" value="ssss"/>
                 <entry key="driver" value="#{driver.substring(3)}r"/>
                 <entry key="test" value="#{driver.length() > T(Math).random() * 10}"/>
                 <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>
                 <entry key="currentUser" value="#{systemProperties['user.name']}"/>
-            </map>
+            </map>-->
         </constructor-arg>
         <constructor-arg name="poolSize" type="java.lang.Integer" value="${db.pool.size}"/>
         <constructor-arg name="args" type="java.util.List">
@@ -36,13 +40,16 @@
                 <ref bean="driver"/>
             </list>
         </constructor-arg>
-        <!--<property name="properties">
+        <property name="properties">
             <map>
                 <entry key="url" value="postgresql"/>
                 <entry key="password" value="ssss"/>
-                <entry key="driver" value-ref="driver"/>
+                <entry key="driver" value="#{driver.substring(3)}r"/>
+                <entry key="test" value="#{driver.length() > T(Math).random() * 10}"/>
+                <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>
+                <entry key="currentUser" value="#{systemProperties['user.name']}"/>
             </map>
-        </property>-->
+        </property>
     </bean>
     <bean id="companyRepository" class="com.example.spring.lesson_1.database.repository.CompanyRepository" factory-method="of">
         <constructor-arg ref="pool1"/>

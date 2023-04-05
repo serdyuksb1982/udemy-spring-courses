@@ -18,6 +18,8 @@ import java.util.Timer;
  * **/
 public class ApplicationRunner {
     public static void main(String[] args) {
+        String value = "hello";
+        System.out.println(CharSequence.class.isAssignableFrom(value.getClass()));
         try (var context = new ClassPathXmlApplicationContext("application.xml")) {
             //Map<String, Object>
             var connectionPool = context.getBean("p1", ConnectionPool.class);
