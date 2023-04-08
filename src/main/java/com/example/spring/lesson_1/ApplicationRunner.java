@@ -1,6 +1,7 @@
 package com.example.spring.lesson_1;
 
 import com.example.spring.lesson_1.database.repository.CompanyRepository;
+import com.example.spring.lesson_1.database.repository.CrudRepository;
 import com.example.spring.lesson_1.database.rpool.ConnectionPool;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -24,8 +25,8 @@ public class ApplicationRunner {
             //Map<String, Object>
             var connectionPool = context.getBean("p1", ConnectionPool.class);
             System.out.println((connectionPool));
-            var companyRepository = context.getBean("companyRepository", CompanyRepository.class);
-            System.out.println(companyRepository);
+            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
+            System.out.println(companyRepository.findById(1));
             System.out.println(System.currentTimeMillis());
         }
 
