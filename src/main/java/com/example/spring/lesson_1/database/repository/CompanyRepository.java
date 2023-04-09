@@ -1,5 +1,6 @@
 package com.example.spring.lesson_1.database.repository;
 
+import com.example.spring.lesson_1.bpp.Auditing;
 import com.example.spring.lesson_1.bpp.InjectBean;
 import com.example.spring.lesson_1.bpp.Transaction;
 import com.example.spring.lesson_1.database.entity.Company;
@@ -8,6 +9,7 @@ import com.example.spring.lesson_1.database.rpool.ConnectionPool;
 import javax.annotation.PostConstruct;
 import java.util.Optional;
 @Transaction
+@Auditing
 public class CompanyRepository implements CrudRepository<Integer, Company> {
     @InjectBean
     private ConnectionPool connectionPool;
@@ -19,6 +21,7 @@ public class CompanyRepository implements CrudRepository<Integer, Company> {
 
     @Override
     public Optional<Company> findById(Integer id) {
+
         System.out.println("Find by id...");
         return Optional.of(new Company(id));
     }
