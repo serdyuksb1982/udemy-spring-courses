@@ -5,14 +5,36 @@ import com.example.spring.lesson_1.bpp.InjectBean;
 import com.example.spring.lesson_1.bpp.Transaction;
 import com.example.spring.lesson_1.database.entity.Company;
 import com.example.spring.lesson_1.database.rpool.ConnectionPool;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Optional;
+
+@Repository
 @Transaction
 @Auditing
 public class CompanyRepository implements CrudRepository<Integer, Company> {
-    @InjectBean
-    private ConnectionPool connectionPool;
+    //@InjectBean
+    //@Autowired
+    //@Qualifier(value = "pool2")
+    private final ConnectionPool connectionPool;
+
+    private final List<ConnectionPool> pools;
+
+
+    private final Integer poolSize;
+
+    public CompanyRepository(ConnectionPool connectionPool,
+                             List<ConnectionPool> pools,
+                             @Value("${db.pool.size}")Integer poolSize) {
+        this.connectionPool = connectionPool;
+        this.pools = pools;
+        this.poolSize = poolSize;
+    }
 
     @PostConstruct
     private void init() {
@@ -31,11 +53,4 @@ public class CompanyRepository implements CrudRepository<Integer, Company> {
         System.out.println("delete entity...");
     }
 
-    /*public CompanyRepository(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
-    }
-
-    public static CompanyRepository of(ConnectionPool connectionPool) {
-        return new CompanyRepository(connectionPool);
-    }*/
 }

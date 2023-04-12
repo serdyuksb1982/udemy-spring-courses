@@ -2,18 +2,19 @@ package com.example.spring.lesson_1.bpp;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
-
+@Component
 public class AuditingBeanPostProcessor implements BeanPostProcessor {
 
     private final Map<String, Class<?>> auditingBeans = new HashMap<>();
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        /**Ищем все аннотации типа Auditing.class**/
+
         if (bean.getClass().isAnnotationPresent(Auditing.class)) {
             auditingBeans.put(beanName, bean.getClass());
         }
