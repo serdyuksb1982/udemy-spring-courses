@@ -1,9 +1,12 @@
 package com.example.spring.lesson_1.database.repository;
 
 import com.example.spring.lesson_1.database.rpool.ConnectionPool;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class UserRepository {
     private final ConnectionPool connectionPool;
 

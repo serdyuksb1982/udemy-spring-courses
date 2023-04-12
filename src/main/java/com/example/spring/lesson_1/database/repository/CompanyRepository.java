@@ -8,6 +8,8 @@ import com.example.spring.lesson_1.database.rpool.ConnectionPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +19,7 @@ import java.util.Optional;
 @Repository
 @Transaction
 @Auditing
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class CompanyRepository implements CrudRepository<Integer, Company> {
     //@InjectBean
     //@Autowired
