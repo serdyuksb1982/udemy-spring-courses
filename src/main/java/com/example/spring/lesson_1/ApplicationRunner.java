@@ -1,7 +1,9 @@
 package com.example.spring.lesson_1;
 
+import com.example.spring.lesson_1.config.ApplicationConfiguration;
 import com.example.spring.lesson_1.database.repository.CrudRepository;
 import com.example.spring.lesson_1.database.rpool.ConnectionPool;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Timer;
@@ -20,7 +22,9 @@ public class ApplicationRunner {
     public static void main(String[] args) {
         String value = "hello";
         System.out.println(CharSequence.class.isAssignableFrom(value.getClass()));
-        try (var context = new ClassPathXmlApplicationContext("application.xml")) {
+        try (var context = new /*ClassPathXmlApplicationContext*/
+                AnnotationConfigApplicationContext(/*"application.xml"*/ApplicationConfiguration.class)
+        ) {
             //Map<String, Object>
             var connectionPool = context.getBean("pool1", ConnectionPool.class);
             System.out.println((connectionPool));
